@@ -1,14 +1,6 @@
 const { WebPDFLoader } = require('langchain/document_loaders/web/pdf');
 const streamToBlob = require('stream-to-blob')
 
-async function getContentReadStream(readable) {
-	const chunks = [];
-	for await (const chunk of readable) {
-		chunks.push(chunk);
-	}
-	return Buffer.concat(chunks);
-}
-
 /**
  * 
  * @After(event = { "UPDATE" }, entity = "GenieService.KnowledgeBase")
@@ -35,7 +27,6 @@ module.exports = async function (results, request) {
 
 		console.log(`file name : ${document.filename}`);
 		const blob = await streamToBlob(document.content);
-		//let fileContent = await getContentReadStream(document.content);
 		const loader = new WebPDFLoader(blob, {
 			parsedItemSeparator: "",
 		});
