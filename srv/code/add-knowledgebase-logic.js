@@ -25,7 +25,16 @@ let array2VectorBuffer = (data) => {
 module.exports = async function (results, request) {
 	// Your code here
 	const url = request.req.path;
-	console.warn("Request URL:" + url);
+	console.info("Request Data:" + request.data.mimeType);
+	if(request.data.mimeType != 'application/pdf')
+		{
+			request.error({
+				code: '400',
+				message: `Only PDF document is supported`
+			});
+			return;
+		}
+	
 	if (url.includes("content")) {    /// in case of new upload
 		let { GenieService } = this.cds.services;
 		let textChunkEntries = []
