@@ -1,6 +1,21 @@
 const { WebPDFLoader } = require('langchain/document_loaders/web/pdf');
 const streamToBlob = require('stream-to-blob')
 
+
+// Helper method to convert embeddings to buffer for insertion
+let array2VectorBuffer = (data) => {
+    const sizeFloat = 4
+    const sizeDimensions = 4
+    const bufferSize = data.length * sizeFloat + sizeDimensions
+  
+    const buffer = Buffer.allocUnsafe(bufferSize)
+    // write size into buffer
+    buffer.writeUInt32LE(data.length, 0)
+    data.forEach((value, index) => {
+      buffer.writeFloatLE(value, index * sizeFloat + sizeDimensions);
+    })
+    return buffer
+  }
 /**
  * 
  * @After(event = { "UPDATE" }, entity = "GenieService.KnowledgeBase")
@@ -13,6 +28,8 @@ module.exports = async function (results, request) {
 	console.warn("Request URL:" + url);
 	if (url.includes("content")) {    /// in case of new upload
 		let { GenieService } = this.cds.services;
+		let textChunkEntries = []
+		const { DocumentChunk } = GenieService.entities;
 		let Attachments = GenieService.entities['KnowledgeBase.attachments']
 		const document = await SELECT.one
 			.from(Attachments.drafts.name)
@@ -31,6 +48,18 @@ module.exports = async function (results, request) {
 			parsedItemSeparator: "",
 		});
 		const docs = await loader.load();
-		console.log(JSON.stringify(docs ));
+		const vectorPlugin = await cds.connect.to('cap-llm-plugin');
+		for (const page of docs) {
+			const embedding = await vectorPlugin.getEmbedding(page.pageContent)
+			const entry = {
+			  "textChunk": page.pageContent,
+			  "fileReference": `Document Name : ${document.filename}, Page Number : ${page.metadata.loc.pageNumber}`,
+			  "embedding": array2VectorBuffer(embedding)
+			}
+			textChunkEntries.push(entry)
+		  }
+		  const insertStatus = await INSERT.into(DocumentChunk).entries(textChunkEntries)
+		  console.log(`record inserted : ${insertStatus}`);
+
 	}
 }

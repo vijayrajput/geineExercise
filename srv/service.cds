@@ -5,7 +5,7 @@ using { sap.emea.btp.geine as my } from '../db/schema';
 service GenieService
 {
     entity DocumentChunk as
-        projection on my.DocumentChunk;
+        projection on my.DocumentChunk excluding { embedding };
 
     @odata.draft.enabled
     entity KnowledgeBase as projection on my.KnowledgeBase

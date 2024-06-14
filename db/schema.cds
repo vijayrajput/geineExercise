@@ -17,7 +17,8 @@ using {Attachments} from '@cap-js/attachments';
 entity DocumentChunk : cuid
 {
     textChunk : LargeString;
-    fileReference : LargeString;
+    fileReference : String(100);
+    embedding: Vector(1536);
 }
 
 type History
