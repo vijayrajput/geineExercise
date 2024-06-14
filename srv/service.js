@@ -4,12 +4,22 @@
  */
 const LCAPApplicationService = require('@sap/low-code-event-handler');
 const add_Knowledgebase_Logic = require('./code/add-knowledgebase-logic');
+const delete_Knowledgebase_Logic = require ('./code/delete-knowledgebase-logic');
+const chat_Logic = require ('./code/chat-logic');
 
 class GenieService extends LCAPApplicationService {
     async init() {
 
         this.after('UPDATE', 'KnowledgeBase.attachments.drafts', async (results, request) => {
             await add_Knowledgebase_Logic(results, request);
+        });
+
+        this.on('deleteEmbeddings', async (request) => {
+            return await delete_Knowledgebase_Logic(request);
+        });
+
+        this.on('chat', async (request) => {
+            return await chat_Logic(request);
         });
 
         return super.init();

@@ -1,0 +1,141 @@
+@server = http://localhost:4004
+@auth = Authorization: Basic alice:
+
+
+### GenieService.DocumentChunk
+GET {{server}}/service/geineExerciseSvcs/DocumentChunk
+Content-Type: application/json
+{{auth}}
+
+
+### GenieService.DocumentChunk
+POST {{server}}/service/geineExerciseSvcs/DocumentChunk
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "30687559-0247-4f60-9433-24748b8699af",
+  "textChunk": "textChunk-30687559",
+  "fileReference": "fileReference-30687559"
+}
+
+
+### GenieService.DocumentChunk
+PATCH {{server}}/service/geineExerciseSvcs/DocumentChunk/30687559-0247-4f60-9433-24748b8699af
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "30687559-0247-4f60-9433-24748b8699af",
+  "textChunk": "textChunk-30687559",
+  "fileReference": "fileReference-30687559"
+}
+
+
+### GenieService.DocumentChunk
+DELETE {{server}}/service/geineExerciseSvcs/DocumentChunk/30687559-0247-4f60-9433-24748b8699af
+Content-Type: application/json
+{{auth}}
+
+
+### GenieService.KnowledgeBase
+GET {{server}}/service/geineExerciseSvcs/KnowledgeBase
+Content-Type: application/json
+{{auth}}
+
+
+### GenieService.KnowledgeBase
+POST {{server}}/service/geineExerciseSvcs/KnowledgeBase
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "68506523-88c1-497f-b85b-867e69710d9c",
+  "note": "note-6850652",
+  "attachments": [
+    {
+      "ID": "23649159-68eb-47bb-989b-b7bc7708556b",
+      "createdAt": "2022-05-22T23:00:00.000Z",
+      "createdBy": "createdBy.e2vt3@example.net",
+      "modifiedAt": "2004-01-04T23:00:00.000Z",
+      "modifiedBy": "modifiedBy.e2vt3@example.org",
+      "url": "url-23649159",
+      "mimeType": "mimeType-23649159",
+      "filename": "filename-23649159",
+      "status": "Scanning",
+      "note": "note-23649159"
+    },
+    {
+      "ID": "23649160-fa37-40ed-8172-5a4b2f6352a8",
+      "createdAt": "2007-12-28T23:00:00.000Z",
+      "createdBy": "createdBy.e2vt4@example.net",
+      "modifiedAt": "2011-02-14T23:00:00.000Z",
+      "modifiedBy": "modifiedBy.e2vt4@example.com",
+      "url": "url-23649160",
+      "mimeType": "mimeType-23649160",
+      "filename": "filename-23649160",
+      "status": "Failed",
+      "note": "note-23649160"
+    }
+  ]
+}
+
+
+### GenieService.KnowledgeBase
+PATCH {{server}}/service/geineExerciseSvcs/KnowledgeBase/68506523-88c1-497f-b85b-867e69710d9c
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "68506523-88c1-497f-b85b-867e69710d9c",
+  "note": "note-6850652",
+  "attachments": [
+    {
+      "ID": "23649159-68eb-47bb-989b-b7bc7708556b",
+      "createdAt": "2022-05-22T23:00:00.000Z",
+      "createdBy": "createdBy.e2vt3@example.net",
+      "modifiedAt": "2004-01-04T23:00:00.000Z",
+      "modifiedBy": "modifiedBy.e2vt3@example.org",
+      "url": "url-23649159",
+      "mimeType": "mimeType-23649159",
+      "filename": "filename-23649159",
+      "status": "Scanning",
+      "note": "note-23649159"
+    },
+    {
+      "ID": "23649160-fa37-40ed-8172-5a4b2f6352a8",
+      "createdAt": "2007-12-28T23:00:00.000Z",
+      "createdBy": "createdBy.e2vt4@example.net",
+      "modifiedAt": "2011-02-14T23:00:00.000Z",
+      "modifiedBy": "modifiedBy.e2vt4@example.com",
+      "url": "url-23649160",
+      "mimeType": "mimeType-23649160",
+      "filename": "filename-23649160",
+      "status": "Failed",
+      "note": "note-23649160"
+    }
+  ]
+}
+
+
+### GenieService.KnowledgeBase
+DELETE {{server}}/service/geineExerciseSvcs/KnowledgeBase/68506523-88c1-497f-b85b-867e69710d9c
+Content-Type: application/json
+{{auth}}
+
+
+### GenieService.KnowledgeBase.attachments
+GET {{server}}/service/geineExerciseSvcs/attachments
+Content-Type: application/json
+{{auth}}
+
+
+### GenieService.chat
+POST {{server}}/service/geineExerciseSvcs/chat
+Content-Type: application/json
+{{auth}}
+
+{
+  "question": "Is MTA is supported in BTP Kyma runtime ?",
+  "history": []
+}

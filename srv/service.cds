@@ -19,6 +19,8 @@ service GenieService
         modifiedAt,
         modifiedBy
     };
+    action chat(question: String, history : many my.History) returns String;
+    function deleteEmbeddings() returns String;
 }
 
 annotate GenieService with @requires :
