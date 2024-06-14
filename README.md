@@ -1,6 +1,6 @@
 # Getting Started
 
-Welcome to your new project.
+Welcome to your Geine Workshop Exercise.
 
 It contains these folders and files, following our recommended project layout:
 
@@ -14,7 +14,7 @@ File or Folder | Purpose
 
 
 ## Next Steps
-
+- log in to Cloud Foundry space using 
 - Open a new terminal and run `cds watch`
 - (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
 - Start adding content, for example, a [db/schema.cds](db/schema.cds).

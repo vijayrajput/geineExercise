@@ -62,7 +62,7 @@ module.exports = async function (results, request) {
 			const embedding = await vectorPlugin.getEmbedding(page.pageContent)
 			const entry = {
 			  "textChunk": page.pageContent,
-			  "fileReference": `Document Name : ${document.filename}, Page Number : ${page.metadata.loc.pageNumber}`,
+			  "fileReference": document.up__ID,
 			  "embedding": array2VectorBuffer(embedding)
 			}
 			textChunkEntries.push(entry)
