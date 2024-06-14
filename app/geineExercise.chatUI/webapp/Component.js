@@ -3,7 +3,7 @@ sap.ui.define(
     function (Component) {
         "use strict";
 
-        return Component.extend("geineExercise.manageKnowledgeDocuments.Component", {
+        return Component.extend("geineExercise.chatUI.Component", {
             metadata: {
                 manifest: "json"
             }

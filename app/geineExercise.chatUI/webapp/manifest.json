@@ -1,7 +1,7 @@
 {
   "_version": "1.48.0",
   "sap.app": {
-    "id": "geineExercise.manageKnowledgeDocuments",
+    "id": "geineExercise.chatUI",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -11,9 +11,9 @@
     "description": "{{appDescription}}",
     "resources": "resources.json",
     "sourceTemplate": {
-      "id": "@sap/generator-fiori:lrop",
+      "id": "@sap/generator-fiori:fpm",
       "version": "1.13.6",
-      "toolsId": "f4fa7946-0c9d-4f84-8936-c20a1141f46c"
+      "toolsId": "01a2b63e-d23e-40be-bdb2-8d4794aac2d2"
     },
     "dataSources": {
       "mainService": {
@@ -27,8 +27,8 @@
     },
     "crossNavigation": {
       "inbounds": {
-        "geineExercisemanageKnowledgeDo-display": {
-          "semanticObject": "geineExercisemanageKnowledgeDo",
+        "geineExercisechatUI-display": {
+          "semanticObject": "geineExercisechatUI",
           "action": "display",
           "title": "{{flpTitle}}",
           "signature": {
@@ -58,7 +58,7 @@
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.121.1",
+      "minUI5Version": "1.108.7",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
@@ -74,7 +74,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "geineExercise.manageKnowledgeDocuments.i18n.i18n"
+          "bundleName": "geineExercise.chatUI.i18n.i18n"
         }
       },
       "": {
@@ -99,59 +99,25 @@
       "config": {},
       "routes": [
         {
+          "name": "DocumentChunkMain",
           "pattern": ":?query:",
-          "name": "KnowledgeBaseList",
-          "target": "KnowledgeBaseList"
-        },
-        {
-          "pattern": "KnowledgeBase({key}):?query:",
-          "name": "KnowledgeBaseObjectPage",
-          "target": "KnowledgeBaseObjectPage"
+          "target": "DocumentChunkMain"
         }
       ],
       "targets": {
-        "KnowledgeBaseList": {
+        "DocumentChunkMain": {
           "type": "Component",
-          "id": "KnowledgeBaseList",
-          "name": "sap.fe.templates.ListReport",
+          "id": "DocumentChunkMain",
+          "name": "sap.fe.core.fpm",
           "options": {
             "settings": {
-              "contextPath": "/KnowledgeBase",
-              "variantManagement": "Page",
-              "navigation": {
-                "KnowledgeBase": {
-                  "detail": {
-                    "route": "KnowledgeBaseObjectPage"
-                  }
-                }
-              },
-              "controlConfiguration": {
-                "@com.sap.vocabularies.UI.v1.LineItem": {
-                  "tableSettings": {
-                    "type": "ResponsiveTable"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "KnowledgeBaseObjectPage": {
-          "type": "Component",
-          "id": "KnowledgeBaseObjectPage",
-          "name": "sap.fe.templates.ObjectPage",
-          "options": {
-            "settings": {
-              "editableHeaderContent": false,
-              "contextPath": "/KnowledgeBase"
+              "viewName": "geineExercise.chatUI.ext.main.Main",
+              "contextPath": "/DocumentChunk"
             }
           }
         }
       }
     }
-  },
-  "sap.fiori": {
-    "registrationIds": [],
-    "archeType": "transactional"
   },
   "sap.cloud": {
     "public": true,

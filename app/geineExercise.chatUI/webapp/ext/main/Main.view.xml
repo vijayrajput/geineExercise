@@ -1,0 +1,71 @@
+<mvc:View displayBlock="true"
+ xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:webc="sap.ui.webc.main"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout" height="100%" controllerName="geineExercise.chatUI.ext.main.Main">
+    <f:DynamicPage id="chatPage" class="sapUiContentPadding chatPage" showFooter="true"   >
+
+		<f:title>
+			<f:DynamicPageTitle >
+				<f:heading>
+					<Title text="Got a Question?"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+
+		<f:header>
+			<f:DynamicPageHeader pinnable="false" >
+				<layout:HorizontalLayout>
+					<layout:VerticalLayout class="sapUiMediumMarginEnd">
+						<ObjectAttribute  text="Experience GenAI first-hand."/>
+					</layout:VerticalLayout>
+				</layout:HorizontalLayout>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content >
+		<ScrollContainer height="100%" vertical="true">
+			<VBox class="sapUiMediumMarginBottom" height="100%">
+
+			<List backgroundDesign="Transparent" 
+    id="feedList"
+    showSeparators="None"
+    items="{chatModel>/EntryCollection}"
+    noData="{= ${chatModel>/EntryCollection}.length === 0}">
+    <items>
+        <FeedListItem 
+            sender="{chatModel>Author}"
+            info="{chatModel>Type}"
+            timestamp="{chatModel>Date}"
+            text="{chatModel>Text}"
+            showIcon="false"
+            convertLinksToAnchorTags="All"/>
+    </items>
+    <noData > 
+                       
+       	<IllustratedMessage enableVerticalResponsiveness="true" illustrationType="sapIllus-NoTasks" 
+        title="Start a Chat" description="Ask your question related to Knowledge Base you have uploaded">
+<additionalContent >
+					<!-- 				<Button icon="sap-icon://study-leave" iconFirst="false" type="Accept" 
+									 text="Or to learn more, visit our SharePoint"  press="onSharePointPress"/> -->
+								</additionalContent>
+					
+				</IllustratedMessage>
+    </noData>
+</List>
+
+
+
+				<Text id="listEndMarker" text="" visible="true" />
+			</VBox>
+			</ScrollContainer>
+		</f:content>
+		<!-- DynamicPage Footer -->
+		<f:footer>
+			<OverflowToolbar height="100px">
+				<FeedInput icon="./utils/genie.ico"  value="{chatModel>/userInput}" id="newMessageInput" post="onPostMessage" showIcon="true" placeholder="Question related to uploaded content"  />
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>
