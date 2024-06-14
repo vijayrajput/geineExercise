@@ -1,0 +1,2 @@
+sap.ui.define(["sap/fe/test/ListReport"],function(e){"use strict";var n={actions:{},assertions:{}};return new e({appId:"geineExercise.manageKnowledgeDocuments",componentId:"KnowledgeBaseList",contextPath:"/KnowledgeBase"},n)});
+//# sourceMappingURL=KnowledgeBaseList.js.map

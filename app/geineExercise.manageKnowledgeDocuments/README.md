@@ -12,7 +12,7 @@
 |**Application Title**<br>manageKnowledgeDocuments|
 |**Namespace**<br>|
 |**UI5 Theme**<br>sap_horizon|
-|**UI5 Version**<br>1.108.7|
+|**UI5 Version**<br>1.121.1|
 |**Enable Code Assist Libraries**<br>False|
 |**Enable TypeScript**<br>False|
 |**Add Eslint configuration**<br>False|

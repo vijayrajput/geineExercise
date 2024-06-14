@@ -1,0 +1,2 @@
+sap.ui.require(["sap/fe/test/JourneyRunner","geineExercise/manageKnowledgeDocuments/test/integration/FirstJourney","geineExercise/manageKnowledgeDocuments/test/integration/pages/KnowledgeBaseList","geineExercise/manageKnowledgeDocuments/test/integration/pages/KnowledgeBaseObjectPage"],function(e,n,t,s){"use strict";var e=new e({launchUrl:sap.ui.require.toUrl("geineExercise/manageKnowledgeDocuments")+"/index.html"});e.run({pages:{onTheKnowledgeBaseList:t,onTheKnowledgeBaseObjectPage:s}},n.run)});
+//# sourceMappingURL=opaTests.qunit.js.map

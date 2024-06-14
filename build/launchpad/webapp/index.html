@@ -2,9 +2,9 @@
 <html>
 
 <head>
-    <title> Project Preview </title>
+    <title> Application Overview </title>
     <script src="shared-config.js"></script>
-    <script src="https://ui5.sap.com/1.120.13/resources/sap-ui-core.js" 
+    <script src="https://ui5.sap.com/1.121.1/resources/sap-ui-core.js" 
             id="sap-ui-bootstrap"
             data-sap-ui-theme="sap_horizon"
             data-sap-ui-bindingSyntax="complex" 
@@ -28,7 +28,7 @@
                     return Controller.extend("PreviewController", {
                         onInit: function () {
 
-                            const data = {"Services":[{"ServiceName":"GenieService","DetailsURL":"./service/geineExerciseSvcs/","Metadata":"./service/geineExerciseSvcs/$metadata","Entities":[{"Name":"DocumentChunk","URL":"./service/geineExerciseSvcs/DocumentChunk","FioriURL":"$fiori-preview/GenieService/DocumentChunk#preview-app"},{"Name":"KnowledgeBase","URL":"./service/geineExerciseSvcs/KnowledgeBase","FioriURL":"$fiori-preview/GenieService/KnowledgeBase#preview-app"}],"EntitiesCount":2}]}
+                            const data = {"Services":[{"ServiceName":"GenieService","DetailsURL":"./service/geineExerciseSvcs/","Metadata":"./service/geineExerciseSvcs/$metadata","Entities":[{"Name":"DocumentChunk","URL":"./service/geineExerciseSvcs/DocumentChunk","FioriURL":""},{"Name":"KnowledgeBase","URL":"./service/geineExerciseSvcs/KnowledgeBase","FioriURL":""}],"EntitiesCount":2}]}
                             this.getView().setModel(new JSONModel(data));
                         }
                     });

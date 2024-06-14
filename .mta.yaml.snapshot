@@ -1,0 +1,217 @@
+_schema-version: '3.1'
+ID: geineExercise
+version: 1.0.0
+description: A simple CAP project.
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - rm -rf build/dist
+        - mkdir -p build/dist
+        - rm -rf build/ui-deployer
+        - mkdir -p build/ui-deployer
+    - builder: custom
+      commands:
+        - npm install --production
+        - >-
+          bash -c "cds -v | grep 'cds-dk' || npm i --production --no-save
+          @sap/cds-dk @sap/mdk-tools"
+        - bash -c "export PATH=$PATH:$(pwd)/node_modules/.bin"
+        - cds build --production
+  after-all:
+    - builder: custom
+      commands:
+        - npm install
+modules:
+  - name: geineExercise-geineExercise.manageKnowledgeDocuments
+    type: html5
+    path: app/geineExercise.manageKnowledgeDocuments
+    build-parameters:
+      builder: custom
+      commands:
+        - rm -rf dist-zip dist
+        - >-
+          npx -p @ui5/cli@^3.0.0 ui5 build --dest dist
+          --include-task=generateCachebusterInfo
+        - mkdir dist-zip
+        - >-
+          bash -c "cd dist && npx bestzip
+          ../dist-zip/geineExercisemanageKnowledgeDocuments.zip *"
+      _artifactName: geineExercisemanageKnowledgeDocuments.zip
+      supported-platforms: []
+      build-result: dist-zip
+  - name: geineExercise-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm
+      ignore:
+        - node_modules
+        - package-lock.json
+    requires:
+      - name: geineExercise-service-uaa
+      - name: geineExercise-service-db
+  - name: geineExercise-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      memory: 256MB
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    build-parameters:
+      builder: npm
+      ignore:
+        - node_modules
+        - package-lock.json
+    requires:
+      - name: geineExercise-service-uaa
+      - name: geineExercise-service-db
+      - name: geineExercise-service-destination
+      - name: geineExercise-service-metadata
+      - name: geineExercise-service-connectivity
+      - name: geineExercise-service-logs
+  - name: geineExercise-aux-destinations
+    type: com.sap.application.content
+    parameters:
+      content:
+        subaccount:
+          existing_destinations_policy: update
+          destinations:
+            - Authentication: OAuth2UserTokenExchange
+              Name: geineExercise-service-uaa
+              ServiceInstanceName: geineExercise-uaa
+              ServiceKeyName: geineExercise-uaa-key
+              sap.cloud.service: lcap.geineExercise
+            - Authentication: OAuth2UserTokenExchange
+              Name: geineExercise-app-srv
+              TokenServiceInstanceName: geineExercise-uaa
+              TokenServiceKeyName: geineExercise-uaa-key
+              URL: ~{srv-api/srv-url}
+              sap.cloud.service: lcap.geineExercise
+            - Name: geineExercise-service-html5-apps-repo-host
+              ServiceInstanceName: geineExercise-html5-apps-repo-host
+              ServiceKeyName: geineExercise-html5-apps-repo-host-key
+              sap.cloud.service: lcap.geineExercise
+            - Authentication: OAuth2UserTokenExchange
+              Name: geineExercise-GenieService
+              TokenServiceInstanceName: geineExercise-uaa
+              TokenServiceKeyName: geineExercise-uaa-key
+              URL: ~{srv-api/srv-url}/service/geineExerciseSvcs
+              sap.cloud.service: lcap.geineExercise
+              sap.applicationdevelopment.actions.enabled: false
+              sap.build.usage: CAP
+              sap.processautomation.enabled: false
+              HTML5.DynamicDestination: false
+              WebIDEEnabled: false
+              MobileEnabled: false
+              AppgyverEnabled: false
+    build-parameters:
+      no-source: true
+    requires:
+      - name: geineExercise-service-uaa
+        parameters:
+          service-key:
+            name: geineExercise-uaa-key
+      - name: srv-api
+      - name: geineExercise-service-html5-apps-repo-host
+        parameters:
+          service-key:
+            name: geineExercise-html5-apps-repo-host-key
+      - name: geineExercise-service-destination
+        parameters:
+          content-target: true
+  - name: geineExercise-launchpad
+    type: html5
+    path: build/launchpad
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - >-
+          npx -p @ui5/cli@^3.0.0 ui5 build --dest dist
+          --include-task=generateCachebusterInfo
+        - bash -c "cd dist && npx bestzip ../../../build/dist/launchpad.zip *"
+        - rm -rf dist
+      _artifactName: launchpad.zip
+      supported-platforms: []
+      build-result: ../../build/dist
+  - name: geineExercise-aux-ui-deployer
+    type: com.sap.application.content
+    path: build/ui-deployer
+    build-parameters:
+      build-result: resources
+      requires:
+        - name: geineExercise-geineExercise.manageKnowledgeDocuments
+          artifacts:
+            - geineExercisemanageKnowledgeDocuments.zip
+          target-path: resources
+        - name: geineExercise-launchpad
+          artifacts:
+            - launchpad.zip
+          target-path: resources
+    requires:
+      - name: geineExercise-service-html5-apps-repo-host
+        parameters:
+          content-target: true
+resources:
+  - type: org.cloudfoundry.managed-service
+    name: geineExercise-service-uaa
+    parameters:
+      service: xsuaa
+      service-plan: application
+      service-name: geineExercise-uaa
+      path: xs-security.json
+      config:
+        oauth2-configuration:
+          redirect-uris:
+            - https://*.${default-domain}/login/*
+        xsappname: geineExercise-${space}
+        role-collections: []
+  - type: org.cloudfoundry.managed-service
+    name: geineExercise-service-db
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+      service-name: geineExercise-db
+  - type: org.cloudfoundry.managed-service
+    name: geineExercise-service-destination
+    parameters:
+      service: destination
+      service-plan: lite
+      service-name: geineExercise-destination
+      config:
+        HTML5Runtime_enabled: true
+        version: 1.0.0
+  - type: org.cloudfoundry.user-provided-service
+    name: geineExercise-service-metadata
+    parameters:
+      service: metadata
+      service-plan: standard
+      service-name: geineExercise-metadata
+      config:
+        default-domain: ${default-domain}
+  - type: org.cloudfoundry.managed-service
+    name: geineExercise-service-connectivity
+    parameters:
+      service: connectivity
+      service-plan: lite
+      service-name: geineExercise-connectivity
+  - type: org.cloudfoundry.managed-service
+    name: geineExercise-service-logs
+    parameters:
+      service: application-logs
+      service-plan: lite
+      service-name: geineExercise-logs
+  - type: org.cloudfoundry.managed-service
+    name: geineExercise-service-html5-apps-repo-host
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+      service-name: geineExercise-html5-apps-repo-host

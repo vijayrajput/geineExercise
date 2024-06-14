@@ -1,5 +1,6 @@
 using { sap.emea.btp.geine as my } from '../db/schema';
 
+@impl: 'srv/service.js'
 @path : '/service/geineExerciseSvcs'
 service GenieService
 {
