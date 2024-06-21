@@ -51,12 +51,12 @@
       "destinations": true,
       "GENERATIVE_AI_HUB": {
         "CHAT_MODEL_DESTINATION_NAME": "AICoreAzureOpenAIDestination",
-        "CHAT_MODEL_DEPLOYMENT_URL": "/inference/deployments/dc0322eee5f9a04d",
-        "CHAT_MODEL_RESOURCE_GROUP": "genie",
+        "CHAT_MODEL_DEPLOYMENT_URL": "/inference/deployments/<deployment-id-chat-model>",
+        "CHAT_MODEL_RESOURCE_GROUP": "<user-id>",
         "CHAT_MODEL_API_VERSION": "2023-05-15",
         "EMBEDDING_MODEL_DESTINATION_NAME": "AICoreAzureOpenAIDestination",
-        "EMBEDDING_MODEL_DEPLOYMENT_URL": "/inference/deployments/d130f4e857abdf1c",
-        "EMBEDDING_MODEL_RESOURCE_GROUP": "genie",
+        "EMBEDDING_MODEL_DEPLOYMENT_URL": "/inference/deployments/<deployment-id-embedding-model>",
+        "EMBEDDING_MODEL_RESOURCE_GROUP": "<user-id>",
         "EMBEDDING_MODEL_API_VERSION": "2023-05-15"
       },
       "AICoreAzureOpenAIDestination": {
