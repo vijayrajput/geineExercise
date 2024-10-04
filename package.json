@@ -65,7 +65,7 @@
           "modelName": "<embedding-model-name>"
         }
       },
-      "AICoreAzureOpenAIDestination": {
+      "GenAIHubDestination": {
         "kind": "rest",
         "credentials": {
           "destination": "aicore-destination",
