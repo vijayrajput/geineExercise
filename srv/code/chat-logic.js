@@ -17,7 +17,7 @@ module.exports = async function (request) {
         const chatModelConfig = cds.env.requires["gen-ai-hub"]["chat"];
         const embeddingModelConfig = cds.env.requires["gen-ai-hub"]["embedding"];
 	    
-        const ragResponse = await vectorplugin.getRagResponse(
+        const ragResponse = await vectorplugin.getRagResponseWithConfig(
             question,
             'sap_emea_btp_geine_DocumentChunk',
             'embedding',
