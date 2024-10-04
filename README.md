@@ -20,7 +20,7 @@ Step 1: Connect to Generative AI Hub
 1.1
 
 From the explorer tab on the right, navigate to the file named package.json. Scroll down until you reach the gen-ai-hub property.
-
+![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/1.webp?raw=true)
 
 1.2
 
