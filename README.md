@@ -26,25 +26,25 @@ From the explorer tab on the right, navigate to the file named package.json. Scr
 
 We now have to fill in the information from Exercise 2 in order to access our deployed models. Anything in <> is a placeholder and needs to be swapped with your own data!
 
-
+![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/2.webp?raw=true)
 
 1.3
 
 Go back to the Launchpad app to get the necessary data. The resource group is just the name of the resource group you created, which should be unique service.
 
+![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/3.webp?raw=true)
 
+![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/4.webp?raw=true)
 
 1.4
 
 We will be using to models in this application, one for embedding data (EMEBEDDING_MODEL) and one LLM for prompting (CHAT_MODEL). When it comes to the LLM, we have some choice, as we deployed a few of them. For this exercise, we suggest using your gpt-4o deployment for best results. We only deployed one embedding model, OpenAI's text-embedding-3-large. 
 
-
-
+![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/5.webp?raw=true)
 
 Important! Be careful to paste the ID's in the correct fields → GPT in CHAT_MODEL and embedding in EMBEDDING_MODEL.
 
-
-
+![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/6.webp?raw=true)
 
 Step 2: Install Dependencies
 
@@ -52,7 +52,7 @@ Step 2: Install Dependencies
 
 Go to the menu and open a terminal like so:
 
-
+![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/7.webp?raw=true)
 
 2.2
 
@@ -60,11 +60,11 @@ Type the following in the terminal and press Enter:
 
 npm i
 
-
+![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/8.webp?raw=true)
 
 Wait for the installation process to finish.
 
-
+![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/9.webp?raw=true)
 
 Step 3: Connect to Cloud Foundry
 
