@@ -52,7 +52,7 @@ Step 2: Install Dependencies
 
 Go to the menu and open a terminal like so:
 
-![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/7.webp?raw=true)
+![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/7.png?raw=true)
 
 2.2
 
@@ -60,11 +60,11 @@ Type the following in the terminal and press Enter:
 
 npm i
 
-![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/8.webp?raw=true)
+![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/8.png?raw=true)
 
 Wait for the installation process to finish.
 
-![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/9.webp?raw=true)
+![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/9.png?raw=true)
 
 Step 3: Connect to Cloud Foundry
 
