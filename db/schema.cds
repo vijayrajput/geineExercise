@@ -18,7 +18,7 @@ entity DocumentChunk : cuid
 {
     textChunk : LargeString;
     fileReference : String(100);
-    embedding: Vector(1536);
+    embedding: Vector(3072);
 }
 
 type History
