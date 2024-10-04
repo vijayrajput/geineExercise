@@ -1,4 +1,4 @@
-const { WebPDFLoader } = require('langchain/document_loaders/web/pdf');
+const { WebPDFLoader } = require('@langchain/community/document_loaders/web/pdf');
 const streamToBlob = require('stream-to-blob')
 
 
@@ -59,7 +59,9 @@ module.exports = async function (results, request) {
 		const docs = await loader.load();
 		const vectorPlugin = await cds.connect.to('cap-llm-plugin');
 		for (const page of docs) {
-			const embedding = await vectorPlugin.getEmbedding(page.pageContent)
+			const embeddingModelConfig = cds.env.requires["gen-ai-hub"]["embedding"];
+			const embeddingResult = await vectorPlugin.getEmbeddingWithConfig(embeddingModelConfig, page.pageContent);
+			const embedding =  embeddingResult?.data[0]?.embedding;
 			const entry = {
 			  "textChunk": page.pageContent,
 			  "fileReference": document.up__ID,
