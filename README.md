@@ -20,7 +20,7 @@ File or Folder | Purpose
 `readme.md` | this getting started guide
 
 # Architecture 
-Architecture
+
 ![alt text](https://github.com/vijayrajput/geineExercise/blob/main/image/Architecture.png?raw=true)
 
 # Getting Start
